@@ -1,6 +1,9 @@
 // Mongoose
 const mongoose = require("mongoose");
 
+// Db connection
+const db = require("../../loaders/db");
+
 // Admin schema
 const adminSchema = new mongoose.Schema(
   {
@@ -26,5 +29,17 @@ const adminSchema = new mongoose.Schema(
 // Create the model
 const Admin = mongoose.model("Admin", adminSchema);
 
+// The switched db
+const getTenantDB = async (tenantName) => {
+  const tenantDb = db.useDb(tenantName);
+  return tenantDb;
+};
+
+// Model in the switched db
+const getModel = async (tenantName) => {
+  const tenantDb = await getTenantDB(tenantName);
+  return tenantDb.model("Admin", adminSchema);
+};
+
 // Export
-module.exports = Admin;
+module.exports = getModel;

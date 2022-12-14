@@ -11,7 +11,7 @@ const compression = require("compression");
 const mongoDBSanitizer = require("express-mongo-sanitize");
 
 // Require GEH
-// const geh = require("../api/geh");
+const geh = require("../api/geh");
 
 // Routers
 
@@ -32,7 +32,7 @@ app.use("/api/v1/admins", adminsRouter);
 app.get("/health", (req, res) => res.send("healthy..."));
 
 //use Global error Handler
-// app.use(geh);
+app.use(geh);
 
 // Export App
 module.exports = app;

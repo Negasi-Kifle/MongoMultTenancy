@@ -5,9 +5,10 @@ const Admin = require("./model");
 exports.createAdmin = async (req, res, next) => {
   try {
     const data = req.body;
-
+    // Model in tenant
+    const AdminModel = await Admin("kemerAdmins");
     // Save data
-    const admin = await Admin.create({
+    const admin = await AdminModel.create({
       firstName: data.firstName,
       lastName: data.lastName,
     });
