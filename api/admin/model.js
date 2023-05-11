@@ -30,14 +30,14 @@ const adminSchema = new mongoose.Schema(
 const Admin = mongoose.model("Admin", adminSchema);
 
 // The switched db
-const getTenantDB = async (tenantName) => {
-  const tenantDb = db.useDb(tenantName);
+const getTenantDB = async (tenantDbName) => {
+  const tenantDb = db.useDb(tenantDbName);
   return tenantDb;
 };
 
 // Model in the switched db
-const getModel = async (tenantName) => {
-  const tenantDb = await getTenantDB(tenantName);
+const getModel = async (tenantDbName) => {
+  const tenantDb = await getTenantDB(tenantDbName);
   return tenantDb.model("Admin", adminSchema);
 };
 
